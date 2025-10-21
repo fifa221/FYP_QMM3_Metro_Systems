@@ -19,6 +19,25 @@
 \usepackage{amsmath, physics, amsfonts}
 \usepackage{hyperref} % Hyperlinks
 
+% Safe logo include: try original filename, then two alternate filenames, otherwise draw a placeholder box
+\usepackage{ifthen}
+\newcommand{\includelogofallback}{%
+    \IfFileExists{QM_logo_Blue_CMYK.png}{%
+        \includegraphics[width=0.5\linewidth]{QM_logo_Blue_CMYK.png}%
+    }{%
+        \IfFileExists{qmul-logo-white.png}{%
+            \includegraphics[width=0.5\linewidth]{qmul-logo-white.png}%
+        }{%
+            \IfFileExists{Queen-Mary_Est_1785_RGB_White_Dark-Yellow-3.png}{%
+                \includegraphics[width=0.5\linewidth]{Queen-Mary_Est_1785_RGB_White_Dark-Yellow-3.png}%
+            }{%
+                % final fallback: invisible placeholder box so layout remains
+                \rule{0.5\linewidth}{0.3\linewidth}%
+            }%
+        }%
+    }%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Theorem Environments
@@ -56,7 +75,7 @@
     \vfill
 	{\Large School of Mathematical Sciences \par}
     \vspace{1cm}
-    {\includegraphics[width=0.5\linewidth]{QM_logo_Blue_CMYK.png} \par}
+    {\includelogofallback \par}
 	\vspace{1cm}
     {\large Month Year \par}
     \vspace{1cm}
@@ -83,7 +102,7 @@
     \noindent Date:\\ \\    
     \noindent Details of collaboration and publications:\\
     \begin{enumerate}
-    \item  The contents in Chapter 1 will form the paper [Paper], arXiv:abcd.efghi, 20XX.
+    \@ 
     \item  ...
     \end{enumerate}
 
@@ -152,7 +171,7 @@ You can also make figures, which will appear in the list of figures above, after
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\linewidth]{QM_logo_Blue_CMYK.png}
+    \includelogofallback
     \caption{First Figure}
     \label{fig:first_figure}
 \end{figure}
